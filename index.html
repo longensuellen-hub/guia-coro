@@ -117,7 +117,7 @@
             font-weight: 600;
         }
 
-        /* Player Integrado na Página (Não preso no rodapé) */
+        /* Player No Fluxo da Página */
         .player-card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -172,6 +172,10 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.2s;
+        }
+
+        button.btn-ctrl:active {
+            transform: scale(0.96);
         }
 
         button.btn-ctrl.active {
@@ -321,6 +325,15 @@
         <audio id="audioPlayer" controls></audio>
         
         <div class="controls-grid">
+            <!-- Navegação Rápida (-5s / +5s) -->
+            <div class="ctrl-row">
+                <span class="section-label">Navegação:</span>
+                <div>
+                    <button class="btn-ctrl" onclick="seekRelative(-5)">⏪ -5s</button>
+                    <button class="btn-ctrl" onclick="seekRelative(5)">+5s ⏩</button>
+                </div>
+            </div>
+
             <!-- Velocidade -->
             <div class="ctrl-row">
                 <span class="section-label">Velocidade:</span>
@@ -390,6 +403,11 @@
             player.play();
 
             loadSavedData();
+        }
+
+        // Navegação Rápida (-5s / +5s)
+        function seekRelative(seconds) {
+            player.currentTime = Math.max(0, Math.min(player.duration || 0, player.currentTime + seconds));
         }
 
         // Velocidade
