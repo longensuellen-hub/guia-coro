@@ -1,128 +1,185 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guia de Estudos - Canto Coral</title>
-  <style>
-    :root {
-      --bg: #f4f6f9;
-      --card: #ffffff;
-      --primary: #4a6fa5;
-      --text: #2c3e50;
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    h1 {
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-      color: var(--primary);
-      text-align: center;
-    }
-    .card {
-      background: var(--card);
-      border-radius: 12px;
-      padding: 16px;
-      width: 100%;
-      max-width: 480px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-bottom: 16px;
-    }
-    .card h2 {
-      font-size: 1.1rem;
-      margin-top: 0;
-      margin-bottom: 12px;
-      border-bottom: 2px solid var(--bg);
-      padding-bottom: 6px;
-    }
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    button {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      text-align: left;
-    }
-    button:active {
-      opacity: 0.8;
-    }
-    .player-fixo {
-      position: sticky;
-      bottom: 12px;
-      width: 100%;
-      max-width: 480px;
-      background: #ffffff;
-      border: 1px solid #e0e0e0;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      margin-top: auto;
-    }
-    .player-fixo h3 {
-      margin: 0 0 8px 0;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    audio {
-      width: 100%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Estudos do Coro</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --accent: #2563eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            padding: 20px;
+            padding-bottom: 120px; /* Espaço para o player fixo */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .song-title {
+            font-size: 1.1rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .voice-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .voice-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 6px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f1f5f9;
+            color: var(--text);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Player Fixo no Rodapé */
+        .player-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 12px 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+        }
+
+        .now-playing {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        audio {
+            width: 100%;
+            height: 40px;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>🎵 Guia de Estudos do Coro</h1>
+    <header>
+        <h1>Guia de Estudos</h1>
+        <div class="song-title">Everyone Sang</div>
+    </header>
 
-  <!-- MÚSICA 1 -->
-  <div class="card">
-    <h2>Everyone Sang</h2>
-    <div class="btn-group">
-      <button onclick="tocar('soprano-piano.mp3', 'Everyone Sang - Soprano (Piano)')">🎹 Soprano - Piano</button>
-      <button onclick="tocar('soprano-cantado.mp3', 'Everyone Sang - Soprano (Cantado)')">🎤 Soprano - Cantado</button>
-      <button onclick="tocar('soprano-ritmo.mp3', 'Everyone Sang - Soprano (Ritmo)')">🗣️ Soprano - Ritmo</button>
-      
-      <button onclick="tocar('contralto-piano.mp3', 'Everyone Sang - Contralto (Piano)')">🎹 Contralto - Piano</button>
-      <button onclick="tocar('contralto-cantado.mp3', 'Everyone Sang - Contralto (Cantado)')">🎤 Contralto - Cantado</button>
-      <button onclick="tocar('contralto-ritmo.mp3', 'Everyone Sang - Contralto (Ritmo)')">🗣️ Contralto - Ritmo</button>
-
-      <button onclick="tocar('tenor-baixo-piano.mp3', 'Everyone Sang - Tenor/Baixo (Piano)')">🎹 Tenor / Baixo - Piano</button>
-      <button onclick="tocar('tenor-baixo-cantado.mp3', 'Everyone Sang - Tenor/Baixo (Cantado)')">🎤 Tenor / Baixo - Cantado</button>
-      <button onclick="tocar('tenor-baixo-ritmo.mp3', 'Everyone Sang - Tenor/Baixo (Ritmo)')">🗣️ Tenor / Baixo - Ritmo</button>
+    <!-- SOPRANO -->
+    <div class="voice-section">
+        <div class="voice-title">Soprano</div>
+        <div class="btn-group">
+            <button onclick="playAudio('soprano-piano.mp3', 'Soprano - Piano', this)">Piano</button>
+            <button onclick="playAudio('soprano-cantado.mp3', 'Soprano - Cantado', this)">Cantado</button>
+            <button onclick="playAudio('soprano-ritmo.mp3', 'Soprano - Ritmo', this)">Ritmo</button>
+        </div>
     </div>
-  </div>
 
-  <!-- PLAYER FIXO NO RODAPÉ -->
-  <div class="player-fixo">
-    <h3 id="titulo-audio">Selecione um áudio acima para ouvir</h3>
-    <audio id="meuPlayer" controls></audio>
-  </div>
+    <!-- CONTRALTO -->
+    <div class="voice-section">
+        <div class="voice-title">Contralto</div>
+        <div class="btn-group">
+            <button onclick="playAudio('contralto-piano.mp3', 'Contralto - Piano', this)">Piano</button>
+            <button onclick="playAudio('contralto-cantado.mp3', 'Contralto - Cantado', this)">Cantado</button>
+            <button onclick="playAudio('contralto-ritmo.mp3', 'Contralto - Ritmo', this)">Ritmo</button>
+        </div>
+    </div>
 
-  <script>
-    function tocar(arquivo, titulo) {
-      const player = document.getElementById('meuPlayer');
-      const tituloEl = document.getElementById('titulo-audio');
-      
-      player.src = arquivo;
-      tituloEl.innerText = titulo;
-      player.play();
-    }
-  </script>
+    <!-- TENOR & BAIXO -->
+    <div class="voice-section">
+        <div class="voice-title">Tenor & Baixo</div>
+        <div class="btn-group">
+            <button onclick="playAudio('tenor-baixo-piano.mp3', 'Tenor & Baixo - Piano', this)">Piano</button>
+            <button onclick="playAudio('tenor-baixo-cantado.mp3', 'Tenor & Baixo - Cantado', this)">Cantado</button>
+            <button onclick="playAudio('tenor-baixo-ritmo.mp3', 'Tenor & Baixo - Ritmo', this)">Ritmo</button>
+        </div>
+    </div>
 
+    <!-- PLAYER PERSISTENTE -->
+    <div class="player-container">
+        <div class="now-playing" id="nowPlaying">Selecione uma guia para ouvir</div>
+        <audio id="audioPlayer" controls></audio>
+    </div>
+
+    <script>
+        function playAudio(file, label, btn) {
+            const player = document.getElementById('audioPlayer');
+            const nowPlaying = document.getElementById('nowPlaying');
+
+            // Remove destaque dos outros botões
+            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Atualiza o player
+            player.src = file;
+            nowPlaying.innerText = "A tocar: " + label;
+            player.play();
+        }
+    </script>
 </body>
 </html>
