@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guia de Estudos do Coro</title>
+    
+    <!-- Configurações PWA e Ícones para Celular -->
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Guia Coro">
+    
+    <!-- Ícones -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/choir.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/color/180/choir.png">
+
     <style>
         :root {
             --primary: #1e3a8a;
@@ -115,6 +127,39 @@
             background: var(--accent);
             color: white;
             font-weight: 600;
+        }
+
+        /* Área de Anotações e Letra */
+        .notes-container {
+            display: none;
+            padding: 14px 16px;
+            background: var(--light-blue);
+            border-top: 1px solid var(--border);
+        }
+
+        .voice-section.active .notes-container {
+            display: block;
+        }
+
+        textarea.notes-input {
+            width: 100%;
+            height: 140px;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            resize: vertical;
+            background: white;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .notes-status {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 4px;
+            text-align: right;
         }
 
         /* Player No Fluxo da Página */
@@ -319,6 +364,15 @@
         </ul>
     </div>
 
+    <!-- LETRA E ANOTAÇÕES -->
+    <div class="voice-section">
+        <div class="voice-header" onclick="toggleSection(this)">📝 Letra e Anotações</div>
+        <div class="notes-container">
+            <textarea class="notes-input" id="userNotes" placeholder="Cole a letra da música aqui, faça anotações de ensaio, traduções ou dinâmicas..." oninput="saveNotes()"></textarea>
+            <div class="notes-status" id="notesStatus">Salvo automaticamente no navegador</div>
+        </div>
+    </div>
+
     <!-- PLAYER NO FLUXO DA PÁGINA -->
     <div class="player-card">
         <div class="now-playing" id="nowPlaying">Selecione uma faixa acima para ouvir</div>
@@ -372,7 +426,7 @@
     <div class="modal-overlay" id="cacheModal" style="display: none;">
         <div class="modal-content">
             <h3>Dica de Estudo 💡</h3>
-            <p>Os seus marcadores de seção e repetições ficam salvos no seu navegador. Lembre-se que ao limpar o histórico/cache do navegador, essas marcações salvas serão apagadas.</p>
+            <p>Os seus marcadores, repetições e anotações ficam salvos no seu navegador. Lembre-se que ao limpar o histórico/cache do navegador, esses dados salvos serão apagados.</p>
             <button class="modal-btn" onclick="closeModal()">Entendi!</button>
         </div>
     </div>
@@ -497,7 +551,24 @@
             return `${m}:${s < 10 ? '0' : ''}${s}`;
         }
 
-        // Salvar e Carregar Cache
+        // Salvar e Carregar Anotações
+        function saveNotes() {
+            const text = document.getElementById('userNotes').value;
+            localStorage.setItem('user_song_notes', text);
+            document.getElementById('notesStatus').innerText = "Salvo automaticamente!";
+            setTimeout(() => {
+                document.getElementById('notesStatus').innerText = "Salvo automaticamente no navegador";
+            }, 2000);
+        }
+
+        function loadNotes() {
+            const savedText = localStorage.getItem('user_song_notes');
+            if (savedText) {
+                document.getElementById('userNotes').value = savedText;
+            }
+        }
+
+        // Salvar e Carregar Cache de Áudios
         function saveData() {
             if (!currentFile) return;
             const payload = { pointA, pointB, markers };
@@ -525,8 +596,9 @@
             renderMarkers();
         }
 
-        // Pop-up Explicativo
+        // Inicialização
         window.onload = function() {
+            loadNotes();
             if (!localStorage.getItem('popupShown')) {
                 document.getElementById('cacheModal').style.display = 'flex';
             }
