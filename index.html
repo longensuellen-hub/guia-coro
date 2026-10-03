@@ -11,11 +11,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Guia Coro">
     
-    <!-- Ícones Locais -->
+    <!-- Ícones -->
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-    
+    <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/choir.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/color/180/choir.png">
 
     <style>
         :root {
@@ -354,6 +353,7 @@
             <li class="track-item" onclick="playAudio('contralto-ritmo.mp3', 'Contralto - Ritmo', this)">Ritmo</li>
         </ul>
     </div>
+     
 
     <!-- TENOR & BAIXO -->
     <div class="voice-section">
@@ -362,6 +362,49 @@
             <li class="track-item" onclick="playAudio('tenor-baixo-piano.mp3', 'Tenor & Baixo - Piano', this)">Piano</li>
             <li class="track-item" onclick="playAudio('tenor-baixo-cantado.mp3', 'Tenor & Baixo - Cantado', this)">Cantado</li>
             <li class="track-item" onclick="playAudio('tenor-baixo-ritmo.mp3', 'Tenor & Baixo - Ritmo', this)">Ritmo</li>
+        </ul>
+    </div>
+
+    <header>
+        
+        <div class="song-title">Hallelujah</div>
+    </header>
+
+    <!-- SOPRANO -->
+    <div class="voice-section">
+        <div class="voice-header" onclick="toggleSection(this)">Soprano</div>
+        <ul class="track-list">
+            <li class="track-item" onclick="playAudio('soprano.mp3', 'Soprano', this)">Voz</li>
+            
+        </ul>
+    </div>
+
+    <!-- CONTRALTO -->
+    <div class="voice-section">
+        <div class="voice-header" onclick="toggleSection(this)">Contralto</div>
+        <ul class="track-list">
+            <li class="track-item" onclick="playAudio('contralto.mp3', 'Contralto', this)">Voz</li>
+            
+        </ul>
+    </div>
+     
+
+    <!-- TENOR  -->
+    <div class="voice-section">
+        <div class="voice-header" onclick="toggleSection(this)">Tenor</div>
+        <ul class="track-list">
+            <li class="track-item" onclick="playAudio('tenor.mp3', 'Tenor', this)">Voz</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- BAIXO  -->
+    <div class="voice-section">
+        <div class="voice-header" onclick="toggleSection(this)">Baixo</div>
+        <ul class="track-list">
+            <li class="track-item" onclick="playAudio('baixo.mp3', 'Baixo', this)">Voz</li>
+            
         </ul>
     </div>
 
