@@ -3,18 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia de Estudos do Coro</title>
+    <title>Guia Play Coro</title>
     
-    <!-- Configurações PWA e Ícones para Celular -->
     <meta name="theme-color" content="#1e3a8a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Guia Coro">
-    
-    <!-- Ícones -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://img.icons8.com/color/192/choir.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://img.icons8.com/color/180/choir.png">
+    <meta name="apple-mobile-web-app-title" content="Guia Play">
 
     <style>
         :root {
@@ -24,7 +18,7 @@
             --text: #1e293b;
             --accent: #2563eb;
             --light-blue: #eff6ff;
-            --border: #e2e8f0;
+            --border: #cbd5e1;
         }
 
         * {
@@ -37,138 +31,34 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            padding: 16px;
-            max-width: 600px;
+            padding: 12px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
         }
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
-            margin-bottom: 4px;
         }
 
-        .song-title {
-            font-size: 1.1rem;
-            color: #64748b;
-            font-weight: 500;
-        }
-
-        /* Seção Expansível (Accordion) */
-        .voice-section {
-            background: var(--card-bg);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-
-        .voice-header {
-            padding: 14px 16px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            background: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .voice-header::after {
-            content: "▼";
+        .subtitle {
             font-size: 0.8rem;
-            transition: transform 0.3s;
-        }
-
-        .voice-section.active .voice-header::after {
-            transform: rotate(180deg);
-        }
-
-        /* Lista Selecionável de Faixas */
-        .track-list {
-            display: none;
-            list-style: none;
-            background: var(--light-blue);
-            border-top: 1px solid var(--border);
-        }
-
-        .voice-section.active .track-list {
-            display: block;
-        }
-
-        .track-item {
-            padding: 12px 16px;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .track-item:last-child {
-            border-bottom: none;
-        }
-
-        .track-item:hover {
-            background: #dbeafe;
-        }
-
-        .track-item.active {
-            background: var(--accent);
-            color: white;
+            color: #64748b;
             font-weight: 600;
         }
 
-        /* Área de Anotações e Letra */
-        .notes-container {
-            display: none;
-            padding: 14px 16px;
-            background: var(--light-blue);
-            border-top: 1px solid var(--border);
-        }
-
-        .voice-section.active .notes-container {
-            display: block;
-        }
-
-        textarea.notes-input {
-            width: 100%;
-            height: 140px;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-family: inherit;
-            resize: vertical;
-            background: white;
-            color: var(--text);
-            line-height: 1.4;
-        }
-
-        .notes-status {
-            font-size: 0.75rem;
-            color: #64748b;
-            margin-top: 4px;
-            text-align: right;
-        }
-
-        /* Player No Fluxo da Página */
+        /* CARD DO PLAYER NO TOPO */
         .player-card {
             background: var(--card-bg);
             border-radius: 12px;
             padding: 16px;
-            margin-top: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
@@ -176,23 +66,88 @@
         }
 
         .now-playing {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--primary);
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
+        }
+
+        /* BOTÕES DE NAIPES */
+        .voices-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .btn-voice {
+            padding: 8px 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .btn-voice.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* EXPANSÍVEL (ACCORDION) DE FAIXAS */
+        .tracks-accordion {
+            display: none;
+            background: var(--light-blue);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px;
+            margin-top: 4px;
+        }
+
+        .tracks-accordion.active {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .track-item-btn {
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-align: left;
+            cursor: pointer;
+            color: var(--text);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .track-item-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
         }
 
         audio {
             width: 100%;
             height: 40px;
+            margin-top: 4px;
         }
 
         .controls-grid {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            border-top: 1px solid #e2e8f0;
         }
 
         .ctrl-row {
@@ -203,7 +158,7 @@
         }
 
         .section-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: #64748b;
         }
@@ -212,9 +167,9 @@
             padding: 8px 12px;
             font-size: 0.85rem;
             background: #f1f5f9;
-            border: 1px solid #cbd5e1;
+            border: 1px solid var(--border);
             border-radius: 8px;
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -229,24 +184,23 @@
             border-color: var(--accent);
         }
 
-        /* Marcadores Nomeados */
+        /* MARCADORES DE SEÇÃO */
         .markers-section {
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border);
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
         }
 
         .marker-input-group {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 6px;
+            margin-top: 6px;
         }
 
         .marker-input-group input {
             flex: 1;
-            padding: 8px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
             font-size: 0.85rem;
         }
 
@@ -254,313 +208,302 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .marker-chip {
             background: #e2e8f0;
-            border: 1px solid #cbd5e1;
-            border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 6px;
-            color: var(--text);
-        }
-
-        .marker-chip:hover {
-            background: #dbeafe;
-            border-color: var(--accent);
+            gap: 4px;
         }
 
         .marker-chip .remove-btn {
             color: #ef4444;
             font-weight: bold;
-            cursor: pointer;
             padding-left: 4px;
         }
 
-        /* Pop-up Modal */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 20px;
+        /* BLOCO DE NOTAS DA MÚSICA */
+        .notes-card {
+            background: var(--card-bg);
             border-radius: 12px;
-            max-width: 400px;
-            text-align: center;
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
         }
 
-        .modal-content h3 {
+        .notes-card h3 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        textarea.notes-input {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            resize: vertical;
+        }
+
+        .notes-status {
+            font-size: 0.7rem;
+            color: #64748b;
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        /* CATÁLOGO DE MÚSICAS */
+        .catalog-title {
+            font-size: 1rem;
+            font-weight: 700;
             color: var(--primary);
             margin-bottom: 10px;
         }
 
-        .modal-content p {
-            font-size: 0.9rem;
-            color: #475569;
-            margin-bottom: 16px;
-            line-height: 1.4;
+        .song-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .modal-btn {
-            background: var(--accent);
+        .song-info h3 {
+            font-size: 0.95rem;
+            color: var(--text);
+        }
+
+        .btn-open {
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            width: 100%;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Guia de Estudos</h1>
-        <div class="song-title">Everyone Sang</div>
+        <h1>Guia Play</h1>
+        <div class="subtitle">VERSÃO FREE • CORO</div>
     </header>
 
-    <!-- SOPRANO -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Soprano</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('soprano-piano.mp3', 'Soprano - Piano', this)">Piano</li>
-            <li class="track-item" onclick="playAudio('soprano-cantado.mp3', 'Soprano - Cantado', this)">Cantado</li>
-            <li class="track-item" onclick="playAudio('soprano-ritmo.mp3', 'Soprano - Ritmo', this)">Ritmo</li>
-        </ul>
-    </div>
+    <main>
+        <!-- PLAYER PRINCIPAL NO TOPO -->
+        <div class="player-card">
+            <div class="now-playing" id="nowPlaying">Everyone Sang</div>
 
-    <!-- CONTRALTO -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Contralto</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('contralto-piano.mp3', 'Contralto - Piano', this)">Piano</li>
-            <li class="track-item" onclick="playAudio('contralto-cantado.mp3', 'Contralto - Cantado', this)">Cantado</li>
-            <li class="track-item" onclick="playAudio('contralto-ritmo.mp3', 'Contralto - Ritmo', this)">Ritmo</li>
-        </ul>
-    </div>
-     
+            <!-- BOTÕES DE NAIPES -->
+            <div>
+                <span class="section-label">Selecione o Naipe:</span>
+                <div class="voices-grid">
+                    <button class="btn-voice" id="btnNaipeSoprano" onclick="selectVoiceGroup('Soprano')">Soprano</button>
+                    <button class="btn-voice" id="btnNaipeContralto" onclick="selectVoiceGroup('Contralto')">Contralto</button>
+                    <button class="btn-voice" id="btnNaipeTenor" onclick="selectVoiceGroup('Tenor')">Tenor</button>
+                    <button class="btn-voice" id="btnNaipeBaixo" onclick="selectVoiceGroup('Baixo')">Baixo</button>
+                </div>
+            </div>
 
-    <!-- TENOR & BAIXO -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Tenor & Baixo</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('tenor-baixo-piano.mp3', 'Tenor & Baixo - Piano', this)">Piano</li>
-            <li class="track-item" onclick="playAudio('tenor-baixo-cantado.mp3', 'Tenor & Baixo - Cantado', this)">Cantado</li>
-            <li class="track-item" onclick="playAudio('tenor-baixo-ritmo.mp3', 'Tenor & Baixo - Ritmo', this)">Ritmo</li>
-        </ul>
-    </div>
+            <!-- CAIXA EXPANSÍVEL DE FAIXAS -->
+            <div class="tracks-accordion" id="tracksAccordion">
+                <!-- Preenchido via JS conforme o naipe escolhido -->
+            </div>
 
-    <header>
-        
-        <div class="song-title">Hallelujah</div>
-    </header>
+            <audio id="audioPlayer" controls></audio>
 
-    <!-- SOPRANO -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Soprano</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('soprano.m4a', 'Soprano', this)">Voz</li>
-            
-        </ul>
-    </div>
+            <div class="controls-grid">
+                <!-- NAVEGAÇÃO RÁPIDA -->
+                <div class="ctrl-row">
+                    <span class="section-label">Navegação:</span>
+                    <div>
+                        <button class="btn-ctrl" onclick="seekRelative(-5)">⏪ -5s</button>
+                        <button class="btn-ctrl" onclick="seekRelative(5)">+5s ⏩</button>
+                    </div>
+                </div>
 
-    <!-- CONTRALTO -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Contralto</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('contralto.m4a', 'Contralto', this)">Voz</li>
-            
-        </ul>
-    </div>
-     
+                <!-- VELOCIDADE -->
+                <div class="ctrl-row">
+                    <span class="section-label">Velocidade:</span>
+                    <div>
+                        <button class="btn-ctrl" onclick="setSpeed(0.75, this)">0.75x</button>
+                        <button class="btn-ctrl active" onclick="setSpeed(1.0, this)">1.0x</button>
+                        <button class="btn-ctrl" onclick="setSpeed(1.25, this)">1.25x</button>
+                    </div>
+                </div>
 
-    <!-- TENOR  -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Tenor</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('tenor.m4a', 'Tenor', this)">Voz</li>
-            
-        </ul>
-    </div>
+                <!-- MARCADORES DE SEÇÃO -->
+                <div class="markers-section">
+                    <span class="section-label">📌 Marcadores de Seção:</span>
+                    <div class="marker-input-group">
+                        <input type="text" id="markerName" placeholder="Ex: Refrão, Trecho A..." />
+                        <button class="btn-ctrl active" onclick="addNamedMarker()">+ Ponto</button>
+                    </div>
+                    <div class="marker-list" id="markerList"></div>
+                </div>
+            </div>
+        </div>
 
-    
-    <!-- BAIXO  -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">Baixo</div>
-        <ul class="track-list">
-            <li class="track-item" onclick="playAudio('baixo.m4a', 'Baixo', this)">Voz</li>
-            
-        </ul>
-    </div>
-
-    <!-- LETRA E ANOTAÇÕES -->
-    <div class="voice-section">
-        <div class="voice-header" onclick="toggleSection(this)">📝 Letra e Anotações</div>
-        <div class="notes-container">
-            <textarea class="notes-input" id="userNotes" placeholder="Cole a letra da música aqui, faça anotações de ensaio, traduções ou dinâmicas..." oninput="saveNotes()"></textarea>
+        <!-- BLOCO DE NOTAS DA MÚSICA ATIVA -->
+        <div class="notes-card">
+            <h3>📝 Letra e Anotações da Música</h3>
+            <textarea class="notes-input" id="userNotes" placeholder="Cole a letra, tradução ou anotações de ensaio..." oninput="saveNotes()"></textarea>
             <div class="notes-status" id="notesStatus">Salvo automaticamente no navegador</div>
         </div>
-    </div>
 
-    <!-- PLAYER NO FLUXO DA PÁGINA -->
-    <div class="player-card">
-        <div class="now-playing" id="nowPlaying">Selecione uma faixa acima para ouvir</div>
-        <audio id="audioPlayer" controls></audio>
-        
-        <div class="controls-grid">
-            <!-- Navegação Rápida (-5s / +5s) -->
-            <div class="ctrl-row">
-                <span class="section-label">Navegação:</span>
-                <div>
-                    <button class="btn-ctrl" onclick="seekRelative(-5)">⏪ -5s</button>
-                    <button class="btn-ctrl" onclick="seekRelative(5)">+5s ⏩</button>
-                </div>
-            </div>
+        <!-- CATÁLOGO DE MÚSICAS -->
+        <div class="catalog-title">📚 Minhas Músicas</div>
 
-            <!-- Velocidade -->
-            <div class="ctrl-row">
-                <span class="section-label">Velocidade:</span>
-                <div>
-                    <button class="btn-ctrl" onclick="setSpeed(0.75, this)">0.75x</button>
-                    <button class="btn-ctrl active" onclick="setSpeed(1.0, this)">1.0x</button>
-                    <button class="btn-ctrl" onclick="setSpeed(1.25, this)">1.25x</button>
-                </div>
+        <div class="song-card">
+            <div class="song-info">
+                <h3>Everyone Sang</h3>
             </div>
-
-            <!-- Loop A-B -->
-            <div class="ctrl-row">
-                <span class="section-label">Repetição (Loop A-B):</span>
-                <div>
-                    <button class="btn-ctrl" id="btnPointA" onclick="setPointA()">Set A</button>
-                    <button class="btn-ctrl" id="btnPointB" onclick="setPointB()">Set B</button>
-                    <button class="btn-ctrl" id="btnToggleLoop" onclick="toggleLoop()">Loop OFF</button>
-                </div>
-            </div>
-
-            <!-- Marcadores Nomeados -->
-            <div class="markers-section">
-                <span class="section-label">Marcadores de Seção:</span>
-                <div class="marker-input-group">
-                    <input type="text" id="markerName" placeholder="Ex: Refrão, Estrofe 2..." />
-                    <button class="btn-ctrl active" onclick="addNamedMarker()">Salvar Ponto</button>
-                </div>
-                <div class="marker-list" id="markerList">
-                    <!-- Chips dos marcadores vão aparecer aqui -->
-                </div>
-            </div>
+            <button class="btn-open" onclick="loadSong('everyone')">▶ Abrir</button>
         </div>
-    </div>
 
-    <!-- POP-UP AVISO CACHE -->
-    <div class="modal-overlay" id="cacheModal" style="display: none;">
-        <div class="modal-content">
-            <h3>Dica de Estudo 💡</h3>
-            <p>Os seus marcadores, repetições e anotações ficam salvos no seu navegador. Lembre-se que ao limpar o histórico/cache do navegador, esses dados salvos serão apagados.</p>
-            <button class="modal-btn" onclick="closeModal()">Entendi!</button>
+        <div class="song-card">
+            <div class="song-info">
+                <h3>Hallelujah</h3>
+            </div>
+            <button class="btn-open" onclick="loadSong('hallelujah')">▶ Abrir</button>
         </div>
-    </div>
+    </main>
 
     <script>
         const player = document.getElementById('audioPlayer');
         const nowPlaying = document.getElementById('nowPlaying');
-        let pointA = null;
-        let pointB = null;
-        let isLoopActive = false;
-        let currentFile = "";
-        let markers = {};
+        const tracksAccordion = document.getElementById('tracksAccordion');
 
-        // Abrir/Fechar caixas
-        function toggleSection(header) {
-            const section = header.parentElement;
-            section.classList.toggle('active');
+        let currentSongKey = '';
+        let currentFile = '';
+        let markers = {};
+        let markerCounter = 1;
+
+        // BANCO DE DADOS COM TODOS OS NAIPES E ÁUDIOS (INCLUINDO RITMO)
+        const songData = {
+            'everyone': {
+                title: 'Everyone Sang',
+                groups: {
+                    'Soprano': [
+                        { label: 'Soprano - Piano', file: 'soprano-piano.mp3' },
+                        { label: 'Soprano - Cantado', file: 'soprano-cantado.mp3' },
+                        { label: 'Soprano - Ritmo falado', file: 'soprano-ritmo.mp3' }
+                    ],
+                    'Contralto': [
+                        { label: 'Contralto - Piano', file: 'contralto-piano.mp3' },
+                        { label: 'Contralto - Cantado', file: 'contralto-cantado.mp3' },
+                        { label: 'Contralto - Ritmo falado', file: 'contralto-ritmo.mp3' }
+                    ],
+                    'Tenor': [
+                        { label: 'Tenor & Baixo - Piano', file: 'tenor-baixo-piano.mp3' },
+                        { label: 'Tenor & Baixo - Cantado', file: 'tenor-baixo-cantado.mp3' },
+                        { label: 'Tenor & Baixo - Ritmo falado', file: 'tenor-baixo-ritmo.mp3' }
+                    ],
+                    'Baixo': [
+                        { label: 'Tenor & Baixo - Piano', file: 'tenor-baixo-piano.mp3' },
+                        { label: 'Tenor & Baixo - Cantado', file: 'tenor-baixo-cantado.mp3' },
+                        { label: 'Tenor & Baixo - Ritmo falado', file: 'tenor-baixo-ritmo.mp3' }
+                    ]
+                }
+            },
+            'hallelujah': {
+                title: 'Hallelujah',
+                groups: {
+                    'Soprano': [{ label: 'Soprano - Voz', file: 'soprano.m4a' }],
+                    'Contralto': [{ label: 'Contralto - Voz', file: 'contralto.m4a' }],
+                    'Tenor': [{ label: 'Tenor - Voz', file: 'tenor.m4a' }],
+                    'Baixo': [{ label: 'Baixo - Voz', file: 'baixo.m4a' }]
+                }
+            }
+        };
+
+        function loadSong(songKey) {
+            currentSongKey = songKey;
+            const song = songData[songKey];
+            if (!song) return;
+
+            nowPlaying.innerText = song.title;
+            loadNotes();
+
+            // Abre o naipe Soprano por padrão
+            selectVoiceGroup('Soprano');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Tocar Áudio
-        function playAudio(file, label, item) {
+        function selectVoiceGroup(groupName) {
+            document.querySelectorAll('.btn-voice').forEach(b => b.classList.remove('active'));
+            const btnActive = document.getElementById('btnNaipe' + groupName);
+            if (btnActive) btnActive.classList.add('active');
+
+            const song = songData[currentSongKey];
+            if (!song || !song.groups[groupName]) return;
+
+            const tracks = song.groups[groupName];
+            tracksAccordion.innerHTML = '';
+            tracksAccordion.classList.add('active');
+
+            tracks.forEach((t, idx) => {
+                const item = document.createElement('button');
+                item.className = 'track-item-btn' + (idx === 0 ? ' active' : '');
+                item.innerHTML = `<span>🎧 ${t.label}</span> <span>▶</span>`;
+                item.onclick = () => playTrack(t.file, item);
+                tracksAccordion.appendChild(item);
+            });
+
+            // Toca a primeira faixa do naipe por padrão
+            playTrack(tracks[0].file, tracksAccordion.children[0]);
+        }
+
+        function playTrack(file, btnElement) {
             currentFile = file;
-            document.querySelectorAll('.track-item').forEach(el => el.classList.remove('active'));
-            item.classList.add('active');
+            if (btnElement) {
+                document.querySelectorAll('.track-item-btn').forEach(b => b.classList.remove('active'));
+                btnElement.classList.add('active');
+            }
 
             player.src = file;
-            nowPlaying.innerText = label;
             player.play();
-
-            loadSavedData();
+            loadSavedMarkers();
         }
 
-        // Navegação Rápida (-5s / +5s)
         function seekRelative(seconds) {
             player.currentTime = Math.max(0, Math.min(player.duration || 0, player.currentTime + seconds));
         }
 
-        // Velocidade
         function setSpeed(speed, btn) {
             player.playbackRate = speed;
             btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
 
-        // Loop A-B
-        function setPointA() {
-            pointA = player.currentTime;
-            document.getElementById('btnPointA').innerText = `A: ${formatTime(pointA)}`;
-            saveData();
-        }
-
-        function setPointB() {
-            pointB = player.currentTime;
-            document.getElementById('btnPointB').innerText = `B: ${formatTime(pointB)}`;
-            saveData();
-        }
-
-        function toggleLoop() {
-            isLoopActive = !isLoopActive;
-            const btn = document.getElementById('btnToggleLoop');
-            if (isLoopActive) {
-                btn.innerText = "Loop ON";
-                btn.classList.add('active');
-            } else {
-                btn.innerText = "Loop OFF";
-                btn.classList.remove('active');
-            }
-        }
-
-        player.ontimeupdate = function() {
-            if (isLoopActive && pointA !== null && pointB !== null && pointB > pointA) {
-                if (player.currentTime >= pointB || player.currentTime < pointA) {
-                    player.currentTime = pointA;
-                }
-            }
-        };
-
-        // Adicionar Marcador Nomeado
+        /* MARCADORES */
         function addNamedMarker() {
-            if (!currentFile) {
-                alert("Selecione uma faixa primeiro!");
-                return;
-            }
+            if (!currentFile) return;
             const input = document.getElementById('markerName');
-            const name = input.value.trim() || `Ponto ${Object.keys(markers).length + 1}`;
-            const time = player.currentTime;
-
-            markers[name] = time;
+            let name = input.value.trim();
+            if (!name) {
+                name = `Ponto ${markerCounter++}`;
+            }
+            markers[name] = player.currentTime;
             input.value = "";
-            saveData();
+            saveMarkers();
             renderMarkers();
         }
 
@@ -571,7 +514,7 @@
         function removeMarker(name, event) {
             event.stopPropagation();
             delete markers[name];
-            saveData();
+            saveMarkers();
             renderMarkers();
         }
 
@@ -582,23 +525,36 @@
                 const time = markers[name];
                 const chip = document.createElement('div');
                 chip.className = 'marker-chip';
-                chip.innerHTML = `📍 ${name} (${formatTime(time)}) <span class="remove-btn" onclick="removeMarker('${name}', event)">✕</span>`;
+                chip.innerHTML = `📍 ${name} (${formatTime(time)}) <span class="remove-btn" onclick="removeMarker('${escapeQuotes(name)}', event)">✕</span>`;
                 chip.onclick = () => jumpToMarker(time);
                 list.appendChild(chip);
             }
         }
 
-        // Formatar tempo em mm:ss
-        function formatTime(seconds) {
-            const m = Math.floor(seconds / 60);
-            const s = Math.floor(seconds % 60);
-            return `${m}:${s < 10 ? '0' : ''}${s}`;
+        function saveMarkers() {
+            if (!currentFile) return;
+            localStorage.setItem('markers_' + currentFile, JSON.stringify({ markers, markerCounter }));
         }
 
-        // Salvar e Carregar Anotações
+        function loadSavedMarkers() {
+            if (!currentFile) return;
+            const saved = localStorage.getItem('markers_' + currentFile);
+            if (saved) {
+                const data = JSON.parse(saved);
+                markers = data.markers || {};
+                markerCounter = data.markerCounter || 1;
+            } else {
+                markers = {};
+                markerCounter = 1;
+            }
+            renderMarkers();
+        }
+
+        /* BLOCO DE NOTAS POR MÚSICA */
         function saveNotes() {
+            if (!currentSongKey) return;
             const text = document.getElementById('userNotes').value;
-            localStorage.setItem('user_song_notes', text);
+            localStorage.setItem('notes_' + currentSongKey, text);
             document.getElementById('notesStatus').innerText = "Salvo automaticamente!";
             setTimeout(() => {
                 document.getElementById('notesStatus').innerText = "Salvo automaticamente no navegador";
@@ -606,52 +562,24 @@
         }
 
         function loadNotes() {
-            const savedText = localStorage.getItem('user_song_notes');
-            if (savedText) {
-                document.getElementById('userNotes').value = savedText;
-            }
+            if (!currentSongKey) return;
+            const savedText = localStorage.getItem('notes_' + currentSongKey);
+            document.getElementById('userNotes').value = savedText || '';
         }
 
-        // Salvar e Carregar Cache de Áudios
-        function saveData() {
-            if (!currentFile) return;
-            const payload = { pointA, pointB, markers };
-            localStorage.setItem('data_' + currentFile, JSON.stringify(payload));
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60);
+            const s = Math.floor(seconds % 60);
+            return `${m}:${s < 10 ? '0' : ''}${s}`;
         }
 
-        function loadSavedData() {
-            if (!currentFile) return;
-            const saved = localStorage.getItem('data_' + currentFile);
-            if (saved) {
-                const data = JSON.parse(saved);
-                pointA = data.pointA ?? null;
-                pointB = data.pointB ?? null;
-                markers = data.markers || {};
-
-                document.getElementById('btnPointA').innerText = pointA !== null ? `A: ${formatTime(pointA)}` : 'Set A';
-                document.getElementById('btnPointB').innerText = pointB !== null ? `B: ${formatTime(pointB)}` : 'Set B';
-            } else {
-                pointA = null;
-                pointB = null;
-                markers = {};
-                document.getElementById('btnPointA').innerText = 'Set A';
-                document.getElementById('btnPointB').innerText = 'Set B';
-            }
-            renderMarkers();
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'");
         }
 
-        // Inicialização
         window.onload = function() {
-            loadNotes();
-            if (!localStorage.getItem('popupShown')) {
-                document.getElementById('cacheModal').style.display = 'flex';
-            }
+            loadSong('everyone');
         };
-
-        function closeModal() {
-            localStorage.setItem('popupShown', 'true');
-            document.getElementById('cacheModal').style.display = 'none';
-        }
     </script>
 </body>
 </html>
