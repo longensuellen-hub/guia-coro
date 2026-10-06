@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Play Coro</title>
-    
+    <title>Guia de Estudos do Coro</title>
+
+    <!-- CONFIGURAÇÕES PWA (ALINHADAS COM O MANIFEST.JSON) -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e3a8a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Guia Play">
+    <meta name="apple-mobile-web-app-title" content="Guia Coro">
+
+    <!-- ÍCONES PWA -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
 
     <style>
         :root {
@@ -99,7 +105,7 @@
             border-color: var(--primary);
         }
 
-        /* EXPANSÍVEL (ACCORDION) DE FAIXAS */
+        /* CAIXA EXPANSÍVEL (ACCORDION) DE FAIXAS */
         .tracks-accordion {
             display: none;
             background: var(--light-blue);
@@ -396,7 +402,7 @@
         let markers = {};
         let markerCounter = 1;
 
-        // BANCO DE DADOS COM TODOS OS NAIPES E ÁUDIOS (INCLUINDO RITMO)
+        // BANCO DE DADOS COM TODOS OS NAIPES E ÁUDIOS
         const songData = {
             'everyone': {
                 title: 'Everyone Sang',
@@ -404,22 +410,22 @@
                     'Soprano': [
                         { label: 'Soprano - Piano', file: 'soprano-piano.mp3' },
                         { label: 'Soprano - Cantado', file: 'soprano-cantado.mp3' },
-                        { label: 'Soprano - Ritmo falado', file: 'soprano-ritmo.mp3' }
+                        { label: 'Soprano - Ritmo', file: 'soprano-ritmo.mp3' }
                     ],
                     'Contralto': [
                         { label: 'Contralto - Piano', file: 'contralto-piano.mp3' },
                         { label: 'Contralto - Cantado', file: 'contralto-cantado.mp3' },
-                        { label: 'Contralto - Ritmo falado', file: 'contralto-ritmo.mp3' }
+                        { label: 'Contralto - Ritmo', file: 'contralto-ritmo.mp3' }
                     ],
                     'Tenor': [
                         { label: 'Tenor & Baixo - Piano', file: 'tenor-baixo-piano.mp3' },
                         { label: 'Tenor & Baixo - Cantado', file: 'tenor-baixo-cantado.mp3' },
-                        { label: 'Tenor & Baixo - Ritmo falado', file: 'tenor-baixo-ritmo.mp3' }
+                        { label: 'Tenor & Baixo - Ritmo', file: 'tenor-baixo-ritmo.mp3' }
                     ],
                     'Baixo': [
                         { label: 'Tenor & Baixo - Piano', file: 'tenor-baixo-piano.mp3' },
                         { label: 'Tenor & Baixo - Cantado', file: 'tenor-baixo-cantado.mp3' },
-                        { label: 'Tenor & Baixo - Ritmo falado', file: 'tenor-baixo-ritmo.mp3' }
+                        { label: 'Tenor & Baixo - Ritmo', file: 'tenor-baixo-ritmo.mp3' }
                     ]
                 }
             },
@@ -442,7 +448,6 @@
             nowPlaying.innerText = song.title;
             loadNotes();
 
-            // Abre o naipe Soprano por padrão
             selectVoiceGroup('Soprano');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -467,7 +472,6 @@
                 tracksAccordion.appendChild(item);
             });
 
-            // Toca a primeira faixa do naipe por padrão
             playTrack(tracks[0].file, tracksAccordion.children[0]);
         }
 
